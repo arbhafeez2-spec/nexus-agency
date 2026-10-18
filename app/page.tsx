@@ -64,7 +64,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <span className="flex items-center font-mono">📞 +91 9731720585</span>
-            <span className="hidden md:flex items-center font-mono">✉️ hello@nexusagency.co.in</span>
+            <span className="hidden md:flex items-center font-mono">✉️arbhafeez2@gmail.com</span>
           </div>
           <div className="flex items-center space-x-3">
             <span className="bg-[#B1FF03]/20 text-[#B1FF03] px-3 py-1 rounded-full font-bold border border-[#B1FF03]/40 flex items-center text-xs tracking-wide">
@@ -393,7 +393,7 @@ export default function Home() {
                   <div className="w-12 h-12 rounded-2xl bg-[#0a0f25] border border-[#1e293b] text-[#B1FF03] flex items-center justify-center text-xl font-bold font-mono">✉️</div>
                   <div>
                     <div className="text-xs text-slate-400 font-mono">Email Address</div>
-                    <div className="text-lg font-bold text-white font-mono">hello@nexusagency.co.in</div>
+                    <div className="text-lg font-bold text-white font-mono">arbhafeez2@gmail.com</div>
                   </div>
                 </div>
 

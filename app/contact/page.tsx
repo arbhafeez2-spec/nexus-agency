@@ -58,7 +58,7 @@ export default function ContactPage() {
             </p>
             <div className="space-y-4 pt-4 font-mono">
               <div className="text-sm text-slate-300">📞 +91 9731720585</div>
-              <div className="text-sm text-slate-300">✉️ hello@nexusagency.co.in</div>
+              <div className="text-sm text-slate-300">✉️ arbhafeez2@gmail.com</div>
               <div className="text-sm text-slate-300">🌐 nexusagency.co.in</div>
             </div>
           </div>

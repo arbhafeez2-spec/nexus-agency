@@ -42,7 +42,7 @@ export default function FAQPage() {
             <Link href="/" className="hover:text-[#ff6600] transition-colors">HOME</Link>
             <Link href="/services" className="hover:text-[#ff6600] transition-colors">SERVICES</Link>
             <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">PORTFOLIO</Link>
-            <Link href="/blog" className="hover:text-[#ff6600] transition-colors">BLOG</Link>
+            
             <Link href="/faq" className="text-[#ff6600] transition-colors">FAQ</Link>
             <Link href="/contact" className="hover:text-[#ff6600] transition-colors">CONTACT US</Link>
           </nav>

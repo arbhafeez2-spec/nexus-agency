@@ -16,7 +16,7 @@ export default function ContactPage() {
             <Link href="/" className="hover:text-[#ff6600] transition-colors">HOME</Link>
             <Link href="/services" className="hover:text-[#ff6600] transition-colors">SERVICES</Link>
             <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">PORTFOLIO</Link>
-            <Link href="/blog" className="hover:text-[#ff6600] transition-colors">BLOG</Link>
+
             <Link href="/faq" className="hover:text-[#ff6600] transition-colors">FAQ</Link>
             <Link href="/contact" className="text-[#ff6600] transition-colors">CONTACT US</Link>
           </nav>
@@ -132,7 +132,7 @@ export default function ContactPage() {
             <ul className="space-y-2.5 text-sm text-gray-400">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
             </ul>
           </div>

@@ -47,9 +47,6 @@ export default function RootLayout({
               <Link href="/services" className="hover:text-[#ff6600] transition-colors">
                 Services
               </Link>
-              <Link href="/solutions" className="hover:text-[#ff6600] transition-colors">
-                Solutions
-              </Link>
               <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">
                 Portfolio
               </Link>

@@ -150,7 +150,6 @@ export default function Home() {
             <Link href="/" className="hover:text-[#ff6600] transition-colors">HOME</Link>
             <Link href="/services" className="hover:text-[#ff6600] transition-colors">SERVICES</Link>
             <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">PORTFOLIO</Link>
-            <Link href="/solutions" className="hover:text-[#ff6600] transition-colors">SOLUTIONS</Link>
             <Link href="#faq" className="hover:text-[#ff6600] transition-colors">FAQ</Link>
             <Link href="/contact" className="hover:text-[#ff6600] transition-colors">CONTACT US</Link>
           </nav>

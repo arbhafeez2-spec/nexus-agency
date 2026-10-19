@@ -198,7 +198,7 @@ export default function ContactPage() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-          <div>&copy; 2026 NexusAgency. All rights reserved. Email: arbhafeez2@gmail.com | WhatsApp: +91 9731720585</div>
+          <div>&copy; 2026 NexusAgency. All rights reserved. Email: arbhafeez2@gmail.com | Location: Bangalore</div>
           <div className="flex gap-6 mt-4 sm:mt-0">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

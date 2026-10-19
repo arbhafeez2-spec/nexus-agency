@@ -1,186 +1,208 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: 'AI Agentic Chatbots', message: '' });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [enquirySubmitted, setEnquirySubmitted] = useState(false);
 
   const faqs = [
-    { q: 'How fast do you respond to enquiries?', a: 'We typically respond to all project enquiries via WhatsApp or email within 15 minutes during business hours.' },
-    { q: 'Can we schedule a discovery call?', a: 'Yes! Simply fill out the form or click our WhatsApp button to book a direct 1-on-1 strategy call with our engineering leads.' },
-    { q: 'What payment terms do you accept?', a: 'We offer flexible milestone-based payment structures for all custom web, mobile, and AI agent projects.' }
+    { q: "What technologies do you specialize in?", a: "We specialize exclusively in Next.js, WordPress, React Native, SEO, AI Chatbots, Website Development, and Autonomous AI Agents." },
+    { q: "How long does a typical project take?", a: "Typical projects take between 3 to 8 weeks depending on complexity and scope." },
+    { q: "Do you provide ongoing support and maintenance?", a: "Yes, we offer 24/7 autonomous monitoring, security updates, and continuous optimization." },
+    { q: "What is your pricing model?", a: "We offer milestone-based fixed pricing and dedicated engineering retainers tailored to your project requirements." }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const whatsappMessage = `Hi Nexus Agency, I'd like to start an enquiry.%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.service}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/919731720585?text=${whatsappMessage}`, '_blank');
+    const formData = new FormData(e.currentTarget);
+    const name = String(formData.get("name") || "");
+    const email = String(formData.get("email") || "");
+    const service = String(formData.get("service") || "Contact Enquiry");
+    const requirements = String(formData.get("requirements") || "");
+
+    const text = `🔔 *CONTACT US ENQUIRY - NEXUSAGENCY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n⚙️ *Service:* ${service}\n📝 *Requirements:* ${requirements}`;
+
+    // WhatsApp + Email Dispatch
+    const waLink = document.createElement('a');
+    waLink.href = `https://api.whatsapp.com/send?phone=919731720585&text=${encodeURIComponent(text)}`;
+    waLink.target = '_blank';
+    document.body.appendChild(waLink);
+    waLink.click();
+    document.body.removeChild(waLink);
+
+    const mailLink = document.createElement('a');
+    mailLink.href = `mailto:arbhafeez2@gmail.com?subject=${encodeURIComponent(`Enquiry: ${service} from ${name}`)}&body=${encodeURIComponent(text)}`;
+    document.body.appendChild(mailLink);
+    mailLink.click();
+    document.body.removeChild(mailLink);
+
+    setEnquirySubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-[#070b19] text-white selection:bg-[#B1FF03] selection:text-[#111111] font-sans">
-      <nav className="sticky top-0 z-50 bg-[#070b19]/90 backdrop-blur-md border-b border-[#1e293b]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
-          <a href="/" className="flex items-center space-x-3">
-            <span className="w-3 h-3 rounded-full bg-[#B1FF03] inline-block animate-ping"></span>
-            <span className="text-2xl font-black tracking-tighter text-white">
-              NEXUS<span className="text-[#B1FF03]"> / AGENCY</span>
-            </span>
-          </a>
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="block py-2 text-white font-bold text-lg">Home</a>
-            <a href="/services" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Services</a>
-            <a href="/ai-mobile" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">AI & Mobile</a>
-            <a href="/about" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">About Us</a>
-            <a href="/contact" className="text-[#B1FF03] transition font-semibold text-sm">Contact</a>
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry." 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-bold px-6 py-3 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition flex items-center space-x-2 text-sm"
-            >
-              <span>Start an enquiry</span>
-              <span>↗</span>
-            </a>
-          </div>
+    <div className="flex flex-col min-h-screen bg-[#f5f2eb] text-[#1a1a1a] font-sans selection:bg-[#ff6600] selection:text-white relative">
+      {/* Top Navbar Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f5f2eb]/90 backdrop-blur-md border-b border-[#1a1a1a]/10">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="text-2xl font-black tracking-tight uppercase flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-[#ff6600]" />
+            NEXUSAGENCY
+          </Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide">
+            <Link href="/" className="hover:text-[#ff6600] transition-colors">HOME</Link>
+            <Link href="/services" className="hover:text-[#ff6600] transition-colors">SERVICES</Link>
+            <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">PORTFOLIO</Link>
+            <Link href="/solutions" className="hover:text-[#ff6600] transition-colors">SOLUTIONS</Link>
+            <Link href="#faq" className="hover:text-[#ff6600] transition-colors">FAQ</Link>
+            <Link href="#enquiry" className="text-[#ff6600] transition-colors">CONTACT US</Link>
+          </nav>
+          <Link
+            href="#enquiry"
+            className="px-6 py-3 rounded-xl font-bold text-xs bg-[#ff6600] text-white hover:bg-[#e65c00] transition-all shadow-[0_4px_20px_rgba(255,102,0,0.3)]"
+          >
+            ENQUIRE NOW
+          </Link>
         </div>
-      </nav>
+      </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-6 space-y-6">
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tighter text-white">Get in Touch</h1>
-            <p className="text-slate-300 text-base leading-relaxed">
-              Fill out the enquiry form or connect with us directly on WhatsApp. We respond within minutes.
-            </p>
-            <div className="space-y-4 pt-4 font-mono">
-              <div className="text-sm text-slate-300">📞 +91 9731720585</div>
-              <div className="text-sm text-slate-300">✉️ arbhafeez2@gmail.com</div>
-              <div className="text-sm text-slate-300">🌐 nexusagency.co.in</div>
-            </div>
-          </div>
+      {/* Hero Section */}
+      <section className="relative pt-44 pb-20 px-6 text-center max-w-5xl mx-auto">
+        <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6600]/10 border border-[#ff6600]/30 text-[#ff6600] text-xs font-bold uppercase tracking-widest mb-6">
+          Get In Touch
+        </div>
+        <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.08] mb-6">
+          Contact <span className="text-[#ff6600]">NexusAgency</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+          Ready to elevate your digital trajectory? Send us your project requirements and connect instantly with our elite engineering team.
+        </p>
+      </section>
 
-          <div className="lg:col-span-6">
-            <div className="bg-[#0a0f25] border border-[#1e293b] p-8 sm:p-10 rounded-3xl shadow-xl">
-              <h3 className="text-2xl font-bold mb-6 text-white">Send Project Enquiry</h3>
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Your Name</label>
-                  <input 
-                    type="text" 
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    placeholder="John Doe" 
-                    className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                  />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Email</label>
-                    <input 
-                      type="email" 
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      placeholder="john@example.com" 
-                      className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Phone</label>
-                    <input 
-                      type="tel" 
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      placeholder="+91 98765 43210" 
-                      className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Select Service</label>
-                  <select 
-                    value={formData.service}
-                    onChange={(e) => setFormData({...formData, service: e.target.value})}
-                    className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#B1FF03]"
-                  >
-                    <option>AI Agentic Chatbots</option>
-                    <option>Enterprise SEO & Ranking</option>
-                    <option>React Native Mobile App</option>
-                    <option>Next.js Website Development</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Message</label>
-                  <textarea 
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    placeholder="Tell us about your project..."
-                    className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                  ></textarea>
-                </div>
-                <button 
-                  type="submit"
-                  className="w-full bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-extrabold py-4 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition"
-                >
-                  Submit & Enquire on WhatsApp ↗
-                </button>
-              </form>
-            </div>
-          </div>
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 px-6 max-w-4xl mx-auto w-full border-t border-[#1a1a1a]/10">
+        <div className="text-center mb-16">
+          <h2 className="text-xs uppercase font-bold tracking-widest text-gray-500 mb-2">// FAQ</h2>
+          <h3 className="text-3xl sm:text-4xl font-black">Frequently Asked Questions</h3>
         </div>
 
-        {/* FAQs Section */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center space-y-2 mb-10">
-            <h2 className="text-xs uppercase tracking-widest text-[#B1FF03] font-mono font-bold">Quick Help</h2>
-            <h3 className="text-3xl font-black tracking-tight text-white">Contact FAQs</h3>
-          </div>
-
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-[#0a0f25] border border-[#1e293b] rounded-2xl p-6 transition">
-              <button 
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex justify-between items-center text-left font-bold text-lg text-white focus:outline-none"
+        <div className="space-y-4">
+          {faqs.map((item, idx) => (
+            <div key={idx} className="bg-white rounded-2xl border border-[#1a1a1a]/10 overflow-hidden shadow-sm">
+              <button
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                className="w-full p-6 text-left font-bold flex justify-between items-center text-[#1a1a1a]"
               >
-                <span>{faq.q}</span>
-                <span className="text-[#B1FF03] text-xl">{openFaq === index ? '−' : '+'}</span>
+                <span>{item.q}</span>
+                <span className="text-[#ff6600] text-xl font-black">{openFaq === idx ? "-" : "+"}</span>
               </button>
-              {openFaq === index && (
-                <p className="mt-4 text-slate-400 text-sm leading-relaxed border-t border-[#1e293b] pt-4">
-                  {faq.a}
-                </p>
+              {openFaq === idx && (
+                <div className="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-[#1a1a1a]/5 pt-4">
+                  {item.a}
+                </div>
               )}
             </div>
           ))}
         </div>
-      </main>
+      </section>
 
-      {/* Footer */}
-      <footer className="bg-[#03050c] border-t border-[#1e293b] py-12 text-slate-400 text-sm mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B1FF03] inline-block"></span>
-              <span className="text-lg font-black text-white tracking-wider">NEXUS<span className="text-[#B1FF03]"> / AGENCY</span></span>
-            </div>
+      {/* Contact Us / Enquiry Form Section */}
+      <section id="enquiry" className="py-24 px-6 max-w-4xl mx-auto w-full">
+        <div className="bg-[#1a1a1a] text-white rounded-[36px] p-8 sm:p-16 shadow-2xl relative overflow-hidden">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <h3 className="text-3xl sm:text-4xl font-black mb-4">Request a Free Consultation</h3>
+            <p className="text-gray-400 text-sm">Submissions instantly open WhatsApp (+91 9731720585) & email arbhafeez2@gmail.com.</p>
+          </div>
 
-            <div className="flex flex-wrap justify-center gap-6 text-xs sm:text-sm text-slate-400 font-mono">
-              <a href="/services" className="hover:text-[#B1FF03] transition">Services</a>
-              <a href="/ai-mobile" className="hover:text-[#B1FF03] transition">AI & Mobile</a>
-              <a href="/contact" className="hover:text-[#B1FF03] transition">Contact</a>
-              <a href="https://wa.me/919731720585" target="_blank" rel="noreferrer" className="hover:text-[#B1FF03] transition">WhatsApp (+91 9731720585)</a>
+          {enquirySubmitted ? (
+            <div className="bg-[#ff6600]/10 border border-[#ff6600]/30 rounded-2xl p-8 text-center text-white">
+              <h4 className="text-2xl font-bold mb-3 text-[#ff6600]">Enquiry Triggered Successfully!</h4>
+              <p className="text-gray-300 text-sm mb-6">WhatsApp and Email clients have been opened with your pre-filled enquiry.</p>
+              <button onClick={() => setEnquirySubmitted(false)} className="px-6 py-3 bg-[#ff6600] text-white rounded-xl font-bold text-xs">Submit Another Enquiry</button>
             </div>
+          ) : (
+            <form onSubmit={handleEnquirySubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Your Name</label>
+                  <input name="name" required type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#ff6600]" />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                  <input name="email" required type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-[#ff6600]" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Select Service</label>
+                <select name="service" className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#ff6600]">
+                  <option>Next.js Development</option>
+                  <option>WordPress Solutions</option>
+                  <option>React Native Apps</option>
+                  <option>Enterprise SEO</option>
+                  <option>AI Chatbots</option>
+                  <option>Website Development</option>
+                  <option>AI Agents</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Take Down Your Requirements</label>
+                <textarea name="requirements" rows={5} placeholder="Describe your project scope, timeline, goals, and specific technical requirements..." className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#ff6600]" required />
+              </div>
+              <button type="submit" className="w-full py-4 rounded-xl font-bold text-sm bg-[#ff6600] text-white hover:bg-[#e65c00] transition-all shadow-lg">
+                Submit & Send to WhatsApp (+91 9731720585) & Email &rarr;
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
 
-            <div className="text-xs text-slate-500 text-center md:text-right font-mono">
-              © 2026 nexusagency.co.in. All rights reserved.
+      {/* Desktop & Mobile Responsive Footer */}
+      <footer className="bg-black text-white pt-20 pb-12 border-t border-white/10 mt-auto">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div>
+            <div className="text-xl font-black uppercase tracking-tight flex items-center gap-2 mb-4">
+              <span className="w-3 h-3 rounded-full bg-[#ff6600]" />
+              NexusAgency
             </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Specializing in Next.js, WordPress, React Native, SEO, AI Chatbots, Website Development, and AI Agents.
+            </p>
+            <div className="text-xs font-mono text-[#ff6600]">arbhafeez2@gmail.com &bull; +91 9731720585</div>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Core Services</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/services" className="hover:text-white transition-colors">Next.js Development</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">WordPress Solutions</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">React Native Apps</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Enterprise SEO</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Advanced Tech</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/services" className="hover:text-white transition-colors">AI Chatbots</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Website Development</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Autonomous AI Agents</Link></li>
+              <li><Link href="/portfolio" className="hover:text-white transition-colors">Client Portfolio</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Company</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="#faq" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="#enquiry" className="hover:text-white transition-colors">Contact Us</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+          <div>&copy; 2026 NexusAgency. All rights reserved. Email: arbhafeez2@gmail.com | WhatsApp: +91 9731720585</div>
+          <div className="flex gap-6 mt-4 sm:mt-0">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </footer>

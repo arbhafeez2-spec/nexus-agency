@@ -1,210 +1,237 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
 
 export default function ServicesPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: 'AI Agentic Chatbots', message: '' });
+  const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [enquirySubmitted, setEnquirySubmitted] = useState(false);
 
-  const servicesList = [
-    { title: 'AI Agentic Chatbots', desc: 'Smart 24/7 autonomous agentic AI bots for advanced support, lead qualification, and complex workflow automation.', badge: 'Popular' },
-    { title: 'Enterprise SEO & Ranking', desc: 'Dominating organic search results with high-impact technical SEO, keyword strategy, and authority link building.', badge: 'High Traffic' },
-    { title: 'React Native Mobile Apps', desc: 'High-performance native & cross-platform mobile app UI/UX design and full-stack builds for iOS & Android.', badge: 'High ROI' },
-    { title: 'Next.js Web Development', desc: 'Lightning-fast, server-side rendered, SEO-optimized web applications built with the modern Next.js framework.', badge: 'Cutting Edge' },
-    { title: 'React.js Web Development', desc: 'Scalable, interactive single-page applications and custom dynamic web interfaces engineered for growth.', badge: 'Robust' },
-    { title: 'WordPress Web Development', desc: 'Custom WordPress theme development, WooCommerce stores, secure enterprise setups, and lightning-fast speed optimization.', badge: 'Enterprise' }
+  const services = [
+    { title: "NEXT.JS DEVELOPMENT", subtitle: "Lightning-Fast Web Apps", description: "High-performance server-rendered React applications with optimal Core Web Vitals, SSR, and ISR.", badge: "⚡" },
+    { title: "WORDPRESS SOLUTIONS", subtitle: "Custom CMS & Headless API", description: "Custom WordPress themes, robust headless CMS architectures, and high-security plugins.", badge: "🌐" },
+    { title: "REACT NATIVE APPS", subtitle: "Cross-Platform Mobile Apps", description: "Cross-platform iOS and Android mobile apps engineered for native 120Hz performance.", badge: "📱" },
+    { title: "ENTERPRISE SEO", subtitle: "Organic Rank Dominance", description: "Data-driven SEO strategies and programmatic keyword dominance to maximize organic search revenue.", badge: "📈" },
+    { title: "AI CHATBOTS", subtitle: "Conversational Intelligence", description: "Custom conversational AI chatbots trained on your business data to handle support 24/7.", badge: "🤖" },
+    { title: "WEBSITE DEVELOPMENT", subtitle: "Full-Stack Custom Sites", description: "End-to-end custom website development featuring stunning UI/UX design and robust backends.", badge: "💻" },
+    { title: "AI AGENTS", subtitle: "Autonomous Workflow Automation", description: "Autonomous multi-agent workflows and RAG pipelines that automate complex enterprise operations.", badge: "🧠" }
   ];
 
   const faqs = [
-    { q: 'How long does it take to deliver a project?', a: 'Depending on complexity, most websites and apps are engineered and deployed within 2 to 4 weeks with full transparency.' },
-    { q: 'Do you provide ongoing support after launch?', a: 'Yes! We offer 24/7 maintenance, AI agent optimization, and continuous updates to ensure maximum conversion and performance.' },
-    { q: 'How do your AI agentic chatbots work?', a: 'Our chatbots are custom-trained on your proprietary business data and integrate directly with WhatsApp Business API and your CRM.' }
+    { q: "What technologies do you specialize in?", a: "We specialize exclusively in Next.js, WordPress, React Native, SEO, AI Chatbots, Website Development, and Autonomous AI Agents." },
+    { q: "How long does a typical project take?", a: "Typical projects take between 3 to 8 weeks depending on complexity and scope." },
+    { q: "Do you provide ongoing support and maintenance?", a: "Yes, we offer 24/7 autonomous monitoring, security updates, and continuous optimization." },
+    { q: "What is your pricing model?", a: "We offer milestone-based fixed pricing and dedicated engineering retainers tailored to your project requirements." }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const whatsappMessage = `Hi Nexus Agency, I'd like to start an enquiry.%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.service}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/919731720585?text=${whatsappMessage}`, '_blank');
+    const formData = new FormData(e.currentTarget);
+    const name = String(formData.get("name") || "");
+    const email = String(formData.get("email") || "");
+    const service = String(formData.get("service") || "Services Enquiry");
+    const requirements = String(formData.get("requirements") || "");
+
+    const text = `🔔 *SERVICES ENQUIRY - NEXUSAGENCY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n⚙️ *Service:* ${service}\n📝 *Requirements:* ${requirements}`;
+
+    // WhatsApp + Email Dispatch
+    const waLink = document.createElement('a');
+    waLink.href = `https://api.whatsapp.com/send?phone=919731720585&text=${encodeURIComponent(text)}`;
+    waLink.target = '_blank';
+    document.body.appendChild(waLink);
+    waLink.click();
+    document.body.removeChild(waLink);
+
+    const mailLink = document.createElement('a');
+    mailLink.href = `mailto:arbhafeez2@gmail.com?subject=${encodeURIComponent(`Enquiry: ${service} from ${name}`)}&body=${encodeURIComponent(text)}`;
+    document.body.appendChild(mailLink);
+    mailLink.click();
+    document.body.removeChild(mailLink);
+
+    setEnquirySubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-[#070b19] text-white selection:bg-[#B1FF03] selection:text-[#111111] font-sans">
-      <nav className="sticky top-0 z-50 bg-[#070b19]/90 backdrop-blur-md border-b border-[#1e293b]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
-          <a href="/" className="flex items-center space-x-3">
-            <span className="w-3 h-3 rounded-full bg-[#B1FF03] inline-block animate-ping"></span>
-            <span className="text-2xl font-black tracking-tighter text-white">
-              NEXUS<span className="text-[#B1FF03]"> / AGENCY</span>
-            </span>
-          </a>
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="block py-2 text-white font-bold text-lg">Home</a>
-            <a href="/services" className="text-[#B1FF03] transition font-semibold text-sm">Services</a>
-            <a href="/ai-mobile" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">AI & Mobile</a>
-            <a href="/about" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">About Us</a>
-            <a href="/contact" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Contact</a>
-          </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry." 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-bold px-6 py-3 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition flex items-center space-x-2 text-sm"
+    <div className="flex flex-col min-h-screen bg-[#f5f2eb] text-[#1a1a1a] font-sans selection:bg-[#ff6600] selection:text-white relative">
+      {/* Top Navbar Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#f5f2eb]/90 backdrop-blur-md border-b border-[#1a1a1a]/10">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="text-2xl font-black tracking-tight uppercase flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-[#ff6600]" />
+            NEXUSAGENCY
+          </Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide">
+            <Link href="/" className="hover:text-[#ff6600] transition-colors">HOME</Link>
+            <Link href="/services" className="text-[#ff6600] transition-colors">SERVICES</Link>
+            <Link href="/portfolio" className="hover:text-[#ff6600] transition-colors">PORTFOLIO</Link>
+            <Link href="/solutions" className="hover:text-[#ff6600] transition-colors">SOLUTIONS</Link>
+            <Link href="#faq" className="hover:text-[#ff6600] transition-colors">FAQ</Link>
+            <Link href="#enquiry" className="hover:text-[#ff6600] transition-colors">CONTACT US</Link>
+          </nav>
+          <Link
+            href="#enquiry"
+            className="px-6 py-3 rounded-xl font-bold text-xs bg-[#ff6600] text-white hover:bg-[#e65c00] transition-all shadow-[0_4px_20px_rgba(255,102,0,0.3)]"
+          >
+            ENQUIRE NOW
+          </Link>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative pt-44 pb-20 px-6 text-center max-w-5xl mx-auto">
+        <div className="inline-block px-4 py-1.5 rounded-full bg-[#ff6600]/10 border border-[#ff6600]/30 text-[#ff6600] text-xs font-bold uppercase tracking-widest mb-6">
+          Our Specialized Services
+        </div>
+        <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.08] mb-6">
+          Engineered For <span className="text-[#ff6600]">Absolute Excellence</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+          We focus exclusively on Next.js, WordPress, React Native, SEO, AI Chatbots, Website Development, and Autonomous AI Agents.
+        </p>
+      </section>
+
+      {/* Markitup Style Services Slider */}
+      <section className="py-20 px-6 max-w-7xl mx-auto w-full border-t border-[#1a1a1a]/10">
+        <div className="text-center mb-12">
+          <h2 className="text-xs uppercase font-bold tracking-widest text-gray-500 mb-2">// SERVICES SLIDER</h2>
+          <h3 className="text-3xl sm:text-4xl font-black">Swipe Through Our Core Capabilities</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {[
+            services[activeServiceSlide],
+            services[(activeServiceSlide + 1) % services.length],
+            services[(activeServiceSlide + 2) % services.length],
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-[32px] p-8 border border-[#1a1a1a]/10 shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col justify-between relative transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] min-h-[380px]"
             >
-              <span>Start an enquiry</span>
-              <span>↗</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
-        <div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter mb-6 text-white">Our Services</h1>
-          <p className="text-lg text-slate-400 max-w-2xl mb-12">
-            Engineered for scale & maximum conversion. Explore our core service offerings.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesList.map((s, i) => (
-              <div key={i} className="bg-[#0a0f25] border border-[#1e293b] hover:border-[#B1FF03] p-8 rounded-3xl shadow-lg flex flex-col justify-between transition-all duration-300">
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#070b19] text-[#B1FF03] border border-[#1e293b]">
-                    {s.badge}
-                  </span>
-                  <h3 className="text-2xl font-bold mt-4 mb-2 text-white">{s.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <h3 className="text-xl font-black tracking-tight text-[#1a1a1a]">{item.title}</h3>
+                  <span className="text-2xl">{item.badge}</span>
                 </div>
-                <div className="pt-6 mt-6 border-t border-[#1e293b]">
-                  <a 
-                    href={`https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry%20regarding%20${encodeURIComponent(s.title)}.`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs font-bold font-mono text-[#B1FF03] hover:underline"
-                  >
-                    Inquire via WhatsApp ↗
-                  </a>
-                </div>
+                <h4 className="text-lg font-bold text-[#1a1a1a] mb-4">{item.subtitle}</h4>
+                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* FAQs Section */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center space-y-2 mb-10">
-            <h2 className="text-xs uppercase tracking-widest text-[#B1FF03] font-mono font-bold">Got Questions?</h2>
-            <h3 className="text-3xl font-black tracking-tight text-white">Frequently Asked Questions</h3>
-          </div>
-
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-[#0a0f25] border border-[#1e293b] rounded-2xl p-6 transition">
-              <button 
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex justify-between items-center text-left font-bold text-lg text-white focus:outline-none"
-              >
-                <span>{faq.q}</span>
-                <span className="text-[#B1FF03] text-xl">{openFaq === index ? '−' : '+'}</span>
-              </button>
-              {openFaq === index && (
-                <p className="mt-4 text-slate-400 text-sm leading-relaxed border-t border-[#1e293b] pt-4">
-                  {faq.a}
-                </p>
-              )}
+              <div className="flex items-end justify-between mt-8 pt-6 border-t border-gray-100">
+                <div className="grid grid-cols-3 gap-1.5 opacity-40">
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-black" />
+                </div>
+                <Link
+                  href="#enquiry"
+                  className="text-xs font-bold uppercase tracking-wider text-black hover:underline"
+                >
+                  Enquire Now &rarr;
+                </Link>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Enquiry Form */}
-        <div className="bg-[#0a0f25] border border-[#1e293b] p-8 sm:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto">
-          <h3 className="text-3xl font-black mb-6 text-white">Start An Enquiry</h3>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Your Name</label>
-              <input 
-                type="text" 
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                placeholder="John Doe" 
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Email</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="john@example.com" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Phone</label>
-                <input 
-                  type="tel" 
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder="+91 98765 43210" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Select Service</label>
-              <select 
-                value={formData.service}
-                onChange={(e) => setFormData({...formData, service: e.target.value})}
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#B1FF03]"
-              >
-                {servicesList.map((s, idx) => (
-                  <option key={idx}>{s.title}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Message</label>
-              <textarea 
-                rows={4}
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-                placeholder="Tell us about your project..."
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              ></textarea>
-            </div>
-            <button 
-              type="submit"
-              className="w-full bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-extrabold py-4 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition"
+        {/* Connected Pagination Bar */}
+        <div className="flex items-center justify-center gap-3">
+          {services.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveServiceSlide(index)}
+              className={`w-4 h-4 rounded-full border-2 border-[#1a1a1a] transition-all flex items-center justify-center ${
+                activeServiceSlide === index ? "bg-[#1a1a1a]" : "bg-transparent"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
             >
-              Submit & Enquire on WhatsApp ↗
+              {activeServiceSlide === index && <span className="w-1.5 h-1.5 rounded-full bg-[#f5f2eb]" />}
             </button>
-          </form>
+          ))}
         </div>
-      </main>
+      </section>
 
-      {/* Footer */}
-      <footer className="bg-[#03050c] border-t border-[#1e293b] py-12 text-slate-400 text-sm mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B1FF03] inline-block"></span>
-              <span className="text-lg font-black text-white tracking-wider">NEXUS<span className="text-[#B1FF03]"> / AGENCY</span></span>
-            </div>
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 px-6 bg-white border-t border-[#1a1a1a]/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-xs uppercase font-bold text-[#ff6600] tracking-widest mb-2">// FAQ</h2>
+            <h3 className="text-3xl sm:text-5xl font-black tracking-tight">Frequently Asked Questions</h3>
+          </div>
 
-            <div className="flex flex-wrap justify-center gap-6 text-xs sm:text-sm text-slate-400 font-mono">
-              <a href="/services" className="hover:text-[#B1FF03] transition">Services</a>
-              <a href="/ai-mobile" className="hover:text-[#B1FF03] transition">AI & Mobile</a>
-              <a href="/contact" className="hover:text-[#B1FF03] transition">Contact</a>
-              <a href="https://wa.me/919731720585" target="_blank" rel="noreferrer" className="hover:text-[#B1FF03] transition">WhatsApp (+91 9731720585)</a>
-            </div>
+          <div className="space-y-4">
+            {faqs.map((item, idx) => (
+              <div key={idx} className="bg-[#faf8f5] rounded-2xl border border-[#1a1a1a]/10 overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                  className="w-full p-6 text-left font-bold flex justify-between items-center text-[#1a1a1a]"
+                >
+                  <span>{item.q}</span>
+                  <span className="text-[#ff6600] text-xl font-black">{openFaq === idx ? "-" : "+"}</span>
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-[#1a1a1a]/5 pt-4">
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="text-xs text-slate-500 text-center md:text-right font-mono">
-              © 2026 nexusagency.co.in. All rights reserved.
+      {/* Contact Us / Enquiry Form Section */}
+      
+
+      {/* Desktop & Mobile Responsive Footer */}
+      <footer className="bg-black text-white pt-20 pb-12 border-t border-white/10 mt-auto">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div>
+            <div className="text-xl font-black uppercase tracking-tight flex items-center gap-2 mb-4">
+              <span className="w-3 h-3 rounded-full bg-[#ff6600]" />
+              NexusAgency
             </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Specializing in Next.js, WordPress, React Native, SEO, AI Chatbots, Website Development, and AI Agents.
+            </p>
+            <div className="text-xs font-mono text-[#ff6600]">arbhafeez2@gmail.com &bull; +91 9731720585</div>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Core Services</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/services" className="hover:text-white transition-colors">Next.js Development</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">WordPress Solutions</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">React Native Apps</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Enterprise SEO</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Advanced Tech</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/services" className="hover:text-white transition-colors">AI Chatbots</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Website Development</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Autonomous AI Agents</Link></li>
+              <li><Link href="/portfolio" className="hover:text-white transition-colors">Client Portfolio</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4 font-mono">Company</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="#faq" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="#enquiry" className="hover:text-white transition-colors">Contact Us</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+          <div>&copy; 2026 NexusAgency. All rights reserved. Email: arbhafeez2@gmail.com | WhatsApp: +91 9731720585</div>
+          <div className="flex gap-6 mt-4 sm:mt-0">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </footer>

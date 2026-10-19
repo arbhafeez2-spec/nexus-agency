@@ -1,203 +1,151 @@
-'use client';
+import Link from "next/link";
 
-import React, { useState } from 'react';
-
-export default function AIMobilePage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: 'AI Agentic Chatbots', message: '' });
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const faqs = [
-    { q: 'How are AI Agentic Chatbots trained?', a: 'We feed your company data, FAQs, and documentation directly into our secure AI models, allowing them to answer complex customer queries 24/7 with human-like understanding.' },
-    { q: 'What is the development timeline for React Native Apps?', a: 'Cross-platform mobile apps for iOS and Android are typically architected, tested, and deployed within 3 to 5 weeks with buttery smooth 60fps animations.' },
-    { q: 'Do you integrate WhatsApp Business API with AI bots?', a: 'Yes! We set up official WhatsApp Business APIs combined with AI agents to automatically qualify leads and send automated broadcast campaigns.' }
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const whatsappMessage = `Hi Nexus Agency, I'd like to start an enquiry.%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.service}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/919731720585?text=${whatsappMessage}`, '_blank');
-  };
-
+export default function AiMobilePage() {
   return (
-    <div className="min-h-screen bg-[#070b19] text-white selection:bg-[#B1FF03] selection:text-[#111111] font-sans">
-      <nav className="sticky top-0 z-50 bg-[#070b19]/90 backdrop-blur-md border-b border-[#1e293b]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
-          <a href="/" className="flex items-center space-x-3">
-            <span className="w-3 h-3 rounded-full bg-[#B1FF03] inline-block animate-ping"></span>
-            <span className="text-2xl font-black tracking-tighter text-white">
-              NEXUS<span className="text-[#B1FF03]"> / AGENCY</span>
-            </span>
-          </a>
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="block py-2 text-white font-bold text-lg">Home</a>
-            <a href="/services" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Services</a>
-            <a href="/ai-mobile" className="text-[#B1FF03] transition font-semibold text-sm">AI & Mobile</a>
-            <a href="/about" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">About Us</a>
-            <a href="/contact" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Contact</a>
+    <div className="min-h-screen bg-[#050505] text-white py-20 px-4 sm:px-6 lg:px-8 selection:bg-[#00ff66] selection:text-black">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center max-w-4xl mx-auto mb-24">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-[#00ff66]/30 text-[#00ff66] text-xs font-semibold mb-6 uppercase tracking-widest shadow-[0_0_20px_rgba(0,255,102,0.15)] font-mono">
+            // INNOVATENEX TECH SUITE
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry." 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-bold px-6 py-3 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition flex items-center space-x-2 text-sm"
-            >
-              <span>Start an enquiry</span>
-              <span>↗</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
-        <div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter mb-6 text-white">AI & Mobile Expertise</h1>
-          <p className="text-lg text-slate-400 max-w-2xl mb-12">
-            Autonomous AI agentic chatbots and buttery smooth React Native apps engineered for maximum engagement and ROI.
+          <h1 className="text-5xl sm:text-7xl font-black tracking-tight mb-6">
+            AI Agents & <span className="text-[#00ff66] drop-shadow-[0_0_35px_rgba(0,255,102,0.4)]">Mobile Solutions</span>
+          </h1>
+          <p className="text-gray-400 text-lg sm:text-xl leading-relaxed">
+            Harnessing state-of-the-art machine learning architectures and building ultra-responsive cross-platform mobile apps that captivate users worldwide.
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-[#0a0f25] border border-[#1e293b] hover:border-[#B1FF03] p-8 rounded-3xl shadow-lg transition-all duration-300">
-              <div className="text-3xl mb-4">🤖</div>
-              <h3 className="text-2xl font-bold mb-3 text-white">AI Agentic Chatbots</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Smart 24/7 autonomous agentic AI bots trained on your business data to handle customer support, lead qualification, and complex workflow automation seamlessly.
-              </p>
-              <a href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry%20regarding%20AI%20Chatbots." target="_blank" rel="noreferrer" className="text-xs font-bold font-mono text-[#B1FF03] hover:underline">
-                Inquire on WhatsApp ↗
-              </a>
-            </div>
-
-            <div className="bg-[#0a0f25] border border-[#1e293b] hover:border-[#B1FF03] p-8 rounded-3xl shadow-lg transition-all duration-300">
-              <div className="text-3xl mb-4">📱</div>
-              <h3 className="text-2xl font-bold mb-3 text-white">React Native Mobile Apps</h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Cross-platform mobile applications with buttery smooth animations, native performance, and beautiful UI/UX design for iOS and Android.
-              </p>
-              <a href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry%20regarding%20Mobile%20Apps." target="_blank" rel="noreferrer" className="text-xs font-bold font-mono text-[#B1FF03] hover:underline">
-                Inquire on WhatsApp ↗
-              </a>
-            </div>
-          </div>
         </div>
 
-        {/* FAQs Section */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center space-y-2 mb-10">
-            <h2 className="text-xs uppercase tracking-widest text-[#B1FF03] font-mono font-bold">Expert Answers</h2>
-            <h3 className="text-3xl font-black tracking-tight text-white">AI & Mobile FAQs</h3>
-          </div>
-
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-[#0a0f25] border border-[#1e293b] rounded-2xl p-6 transition">
-              <button 
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex justify-between items-center text-left font-bold text-lg text-white focus:outline-none"
-              >
-                <span>{faq.q}</span>
-                <span className="text-[#B1FF03] text-xl">{openFaq === index ? '−' : '+'}</span>
-              </button>
-              {openFaq === index && (
-                <p className="mt-4 text-slate-400 text-sm leading-relaxed border-t border-[#1e293b] pt-4">
-                  {faq.a}
-                </p>
-              )}
+        {/* AI Agents Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] text-xs font-bold uppercase tracking-wider font-mono">
+              // ARTIFICIAL INTELLIGENCE DIVISION
             </div>
-          ))}
-        </div>
-
-        {/* Enquiry Form */}
-        <div className="bg-[#0a0f25] border border-[#1e293b] p-8 sm:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto">
-          <h3 className="text-3xl font-black mb-6 text-white">Start An Enquiry</h3>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Your Name</label>
-              <input 
-                type="text" 
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                placeholder="John Doe" 
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Email</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="john@example.com" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+              Autonomous AI Agents & Enterprise LLMs
+            </h2>
+            <p className="text-gray-400 text-base leading-relaxed">
+              We engineer custom cognitive architectures that integrate seamlessly into your existing workflows. From customer-facing autonomous support agents to internal RAG data synthesizers, our AI solutions operate 24/7 with zero human latency.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Proprietary RAG Pipelines</h4>
+                  <p className="text-gray-400 text-xs">Connect your enterprise knowledge base securely to state-of-the-art LLMs with zero hallucination.</p>
+                </div>
               </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Phone</label>
-                <input 
-                  type="tel" 
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder="+91 98765 43210" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Multi-Agent Orchestration</h4>
+                  <p className="text-gray-400 text-xs">Deploy teams of specialized AI agents that collaborate to solve complex business operations.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Secure Enterprise Deployment</h4>
+                  <p className="text-gray-400 text-xs">SOC2 compliant on-premise or cloud model hosting ensuring absolute data privacy.</p>
+                </div>
               </div>
             </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Select Service</label>
-              <select 
-                value={formData.service}
-                onChange={(e) => setFormData({...formData, service: e.target.value})}
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#B1FF03]"
+            <div className="pt-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold text-sm bg-[#00ff66] text-black hover:bg-[#00cc52] transition-all shadow-[0_0_25px_rgba(0,255,102,0.4)]"
               >
-                <option>AI Agentic Chatbots</option>
-                <option>React Native Mobile Apps</option>
-              </select>
+                Deploy AI Agents &rarr;
+              </Link>
             </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Message</label>
-              <textarea 
-                rows={4}
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-                placeholder="Tell us about your project..."
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              ></textarea>
-            </div>
-            <button 
-              type="submit"
-              className="w-full bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-extrabold py-4 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition"
-            >
-              Submit & Enquire on WhatsApp ↗
-            </button>
-          </form>
-        </div>
-      </main>
+          </div>
 
-      {/* Footer */}
-      <footer className="bg-[#03050c] border-t border-[#1e293b] py-12 text-slate-400 text-sm mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B1FF03] inline-block"></span>
-              <span className="text-lg font-black text-white tracking-wider">NEXUS<span className="text-[#B1FF03]"> / AGENCY</span></span>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-6 text-xs sm:text-sm text-slate-400 font-mono">
-              <a href="/services" className="hover:text-[#B1FF03] transition">Services</a>
-              <a href="/ai-mobile" className="hover:text-[#B1FF03] transition">AI & Mobile</a>
-              <a href="/contact" className="hover:text-[#B1FF03] transition">Contact</a>
-              <a href="https://wa.me/919731720585" target="_blank" rel="noreferrer" className="hover:text-[#B1FF03] transition">WhatsApp (+91 9731720585)</a>
-            </div>
-
-            <div className="text-xs text-slate-500 text-center md:text-right font-mono">
-              © 2026 nexusagency.co.in. All rights reserved.
+          <div className="bg-[#0c0c0c] border border-[#1a1a1a] rounded-3xl p-8 sm:p-10 shadow-[0_0_50px_rgba(0,255,102,0.1)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#00ff66]/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="font-mono text-xs text-[#00ff66] mb-6">// INNOVATENEX_AI_RUNTIME.log</div>
+            <div className="space-y-4 font-mono text-xs text-gray-300 bg-[#050505] p-6 rounded-2xl border border-[#1a1a1a]">
+              <p className="text-[#00ff66]">&gt; Initializing neural weights and embedding models...</p>
+              <p>&gt; Connecting to vector database (Pinecone/Milvus)... OK</p>
+              <p>&gt; Loading LLM weights (GPT-4o / Claude 3.5 Sonnet)... OK</p>
+              <p className="text-[#00ff66]">&gt; Autonomous agent swarm active and listening for requests.</p>
+              <div className="pt-4 border-t border-[#1a1a1a] text-gray-500">
+                System Status: 99.99% Uptime | Avg Latency: 38ms
+              </div>
             </div>
           </div>
         </div>
-      </footer>
+
+        {/* Cross-Platform Mobile Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="order-2 lg:order-1 bg-[#0c0c0c] border border-[#1a1a1a] rounded-3xl p-8 sm:p-10 shadow-[0_0_50px_rgba(0,255,102,0.1)] relative overflow-hidden">
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#00ff66]/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="font-mono text-xs text-[#00ff66] mb-6">// MOBILE_APP_METRICS.json</div>
+            <div className="space-y-4 font-mono text-xs text-gray-300 bg-[#050505] p-6 rounded-2xl border border-[#1a1a1a]">
+              <div className="flex justify-between items-center border-b border-[#1a1a1a] pb-3">
+                <span className="text-gray-500">Framework:</span>
+                <span className="text-[#00ff66]">React Native / Flutter</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-[#1a1a1a] pb-3">
+                <span className="text-gray-500">Target Frame Rate:</span>
+                <span className="text-white">120 FPS Locked</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-[#1a1a1a] pb-3">
+                <span className="text-gray-500">App Store Rating:</span>
+                <span className="text-[#00ff66]">4.9 / 5.0</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-500">Crash-Free Users:</span>
+                <span className="text-white">99.98%</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2 space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#00ff66]/10 border border-[#00ff66]/30 text-[#00ff66] text-xs font-bold uppercase tracking-wider font-mono">
+              // MOBILE ENGINEERING DIVISION
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+              High-Performance Cross-Platform Mobile Apps
+            </h2>
+            <p className="text-gray-400 text-base leading-relaxed">
+              We engineer polished, responsive mobile applications that combine native performance with breathtaking cyberpunk UI/UX design. Every animation is meticulously tuned for 120Hz displays.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Unified Codebase</h4>
+                  <p className="text-gray-400 text-xs">Write once with React Native or Flutter, deploy natively to both iOS and Android app stores.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Offline-First Architecture</h4>
+                  <p className="text-gray-400 text-xs">Robust local database synchronization ensuring full app functionality without internet connectivity.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-[#00ff66]/20 text-[#00ff66] flex items-center justify-center font-bold text-xs mt-1 shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-white mb-1">Enterprise Security</h4>
+                  <p className="text-gray-400 text-xs">Biometric authentication, secure keychain storage, and end-to-end encrypted API requests.</p>
+                </div>
+              </div>
+            </div>
+            <div className="pt-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold text-sm bg-[#00ff66] text-black hover:bg-[#00cc52] transition-all shadow-[0_0_25px_rgba(0,255,102,0.4)]"
+              >
+                Build Mobile App &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

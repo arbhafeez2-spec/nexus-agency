@@ -1,195 +1,93 @@
-'use client';
-
-import React, { useState } from 'react';
+import Link from "next/link";
 
 export default function AboutPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: 'General Enquiry', message: '' });
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const faqs = [
-    { q: 'What is Nexus Agency?', a: 'We are an independent digital studio designing and building high-converting digital experiences, AI agents, mobile apps, and enterprise web solutions.' },
-    { q: 'Where are you located?', a: 'We operate globally with our core engineering and design team based out of India, servicing ambitious brands worldwide.' },
-    { q: 'How do we get started?', a: 'Simply fill out the enquiry form below or connect with us instantly via WhatsApp at +91 9731720585.' }
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const whatsappMessage = `Hi Nexus Agency, I'd like to start an enquiry.%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.service}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/919731720585?text=${whatsappMessage}`, '_blank');
-  };
-
   return (
-    <div className="min-h-screen bg-[#070b19] text-white selection:bg-[#B1FF03] selection:text-[#111111] font-sans">
-      <nav className="sticky top-0 z-50 bg-[#070b19]/90 backdrop-blur-md border-b border-[#1e293b]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
-          <a href="/" className="flex items-center space-x-3">
-            <span className="w-3 h-3 rounded-full bg-[#B1FF03] inline-block animate-ping"></span>
-            <span className="text-2xl font-black tracking-tighter text-white">
-              NEXUS<span className="text-[#B1FF03]"> / AGENCY</span>
-            </span>
-          </a>
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="block py-2 text-white font-bold text-lg">Home</a>
-            <a href="/services" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Services</a>
-            <a href="/ai-mobile" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">AI & Mobile</a>
-            <a href="/about" className="text-[#B1FF03] transition font-semibold text-sm">About Us</a>
-            <a href="/contact" className="text-slate-300 hover:text-[#B1FF03] transition font-semibold text-sm">Contact</a>
+    <div className="min-h-screen bg-[#050505] text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a1a]/80 border border-[#00ff66]/30 text-[#00ff66] text-xs font-semibold mb-6 uppercase tracking-wide shadow-[0_0_20px_rgba(0,255,102,0.15)]">
+            About InnovateNex
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="https://wa.me/919731720585?text=Hi%20Nexus%20Agency,%20I'd%20like%20to%20start%20an%20enquiry." 
-              target="_blank" 
-              rel="noreferrer"
-              className="bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-bold px-6 py-3 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition flex items-center space-x-2 text-sm"
-            >
-              <span>Start an enquiry</span>
-              <span>↗</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
-        <div>
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tighter mb-6 text-white">About Us</h1>
-          <p className="text-xl text-slate-300 max-w-3xl leading-relaxed mb-12">
-            We are an independent digital studio designing and building high-converting digital experiences that make ambitious businesses impossible to ignore.
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            Engineering the <span className="text-[#00ff66] drop-shadow-[0_0_30px_rgba(0,255,102,0.4)]">Digital Future</span>
+          </h1>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            We are a collective of elite software engineers, AI researchers, and cyberpunk designers dedicated to building category-defining digital solutions.
           </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-[#1e293b]">
-            <div className="bg-[#0a0f25] border border-[#1e293b] p-8 rounded-3xl">
-              <div className="text-3xl font-black mb-2 text-[#B1FF03]">100+</div>
-              <div className="text-sm text-slate-400">Projects Delivered Worldwide</div>
+        {/* Mission & Vision */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24">
+          <div className="bg-[#0c0c0c] border border-[#1a1a1a] hover:border-[#00ff66]/40 rounded-3xl p-10 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-[#00ff66]/10 border border-[#00ff66]/30 flex items-center justify-center text-[#00ff66] font-bold text-xl mb-6">
+              01
             </div>
-            <div className="bg-[#0a0f25] border border-[#1e293b] p-8 rounded-3xl">
-              <div className="text-3xl font-black mb-2 text-[#B1FF03]">24/7</div>
-              <div className="text-sm text-slate-400">AI Agent & Technical Support</div>
+            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+            <p className="text-gray-400 leading-relaxed text-sm">
+              To empower ambitious enterprises with artificial intelligence and high-performance engineering that scales effortlessly, reduces friction, and creates undeniable competitive advantage.
+            </p>
+          </div>
+
+          <div className="bg-[#0c0c0c] border border-[#1a1a1a] hover:border-[#00ff66]/40 rounded-3xl p-10 transition-all">
+            <div className="w-12 h-12 rounded-xl bg-[#00ff66]/10 border border-[#00ff66]/30 flex items-center justify-center text-[#00ff66] font-bold text-xl mb-6">
+              02
             </div>
-            <div className="bg-[#0a0f25] border border-[#1e293b] p-8 rounded-3xl">
-              <div className="text-3xl font-black mb-2 text-[#B1FF03]">99.9%</div>
-              <div className="text-sm text-slate-400">Client Satisfaction & ROI</div>
+            <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+            <p className="text-gray-400 leading-relaxed text-sm">
+              To be the premier global innovation partner for next-generation tech ecosystems, where autonomous AI systems and human ingenuity unite to solve complex industrial challenges.
+            </p>
+          </div>
+        </div>
+
+        {/* Core Values */}
+        <div className="mb-24">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-xs uppercase font-bold text-[#00ff66] tracking-widest mb-3">Core Principles</h2>
+            <h3 className="text-3xl font-extrabold">What Drives Our Engineering</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-[#0c0c0c] border border-[#1a1a1a] p-8 rounded-2xl">
+              <div className="text-[#00ff66] font-mono text-xs mb-2">01 / SPEED</div>
+              <h4 className="text-xl font-bold mb-3">Relentless Velocity</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                We believe speed is a feature. From architecture to deployment, we move with extreme agility without sacrificing quality.
+              </p>
+            </div>
+
+            <div className="bg-[#0c0c0c] border border-[#1a1a1a] p-8 rounded-2xl">
+              <div className="text-[#00ff66] font-mono text-xs mb-2">02 / PRECISION</div>
+              <h4 className="text-xl font-bold mb-3">Uncompromising Quality</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Every line of code is written with rigorous attention to detail, security, and scalability.
+              </p>
+            </div>
+
+            <div className="bg-[#0c0c0c] border border-[#1a1a1a] p-8 rounded-2xl">
+              <div className="text-[#00ff66] font-mono text-xs mb-2">03 / MASTERY</div>
+              <h4 className="text-xl font-bold mb-3">AI-First Approach</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                We leverage state-of-the-art AI tooling and agentic workflows to multiply engineering output and user engagement.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* FAQs Section */}
-        <div className="max-w-4xl mx-auto space-y-6">
-          <div className="text-center space-y-2 mb-10">
-            <h2 className="text-xs uppercase tracking-widest text-[#B1FF03] font-mono font-bold">Company Insights</h2>
-            <h3 className="text-3xl font-black tracking-tight text-white">About Us FAQs</h3>
-          </div>
-
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-[#0a0f25] border border-[#1e293b] rounded-2xl p-6 transition">
-              <button 
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex justify-between items-center text-left font-bold text-lg text-white focus:outline-none"
-              >
-                <span>{faq.q}</span>
-                <span className="text-[#B1FF03] text-xl">{openFaq === index ? '−' : '+'}</span>
-              </button>
-              {openFaq === index && (
-                <p className="mt-4 text-slate-400 text-sm leading-relaxed border-t border-[#1e293b] pt-4">
-                  {faq.a}
-                </p>
-              )}
-            </div>
-          ))}
+        {/* CTA */}
+        <div className="bg-[#0c0c0c] border border-[#1a1a1a] rounded-3xl p-12 text-center">
+          <h3 className="text-3xl font-black mb-4">Want to Work with Our Elite Team?</h3>
+          <p className="text-gray-400 max-w-xl mx-auto mb-8 text-sm">
+            Let's discuss how InnovateNex can accelerate your technological roadmap.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-sm bg-[#00ff66] text-black hover:bg-[#00cc52] transition-all shadow-[0_0_25px_rgba(0,255,102,0.4)]"
+          >
+            Get in Touch &rarr;
+          </Link>
         </div>
-
-        {/* Enquiry Form */}
-        <div className="bg-[#0a0f25] border border-[#1e293b] p-8 sm:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto">
-          <h3 className="text-3xl font-black mb-6 text-white">Start An Enquiry</h3>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Your Name</label>
-              <input 
-                type="text" 
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                placeholder="John Doe" 
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Email</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="john@example.com" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Phone</label>
-                <input 
-                  type="tel" 
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder="+91 98765 43210" 
-                  className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Select Service</label>
-              <select 
-                value={formData.service}
-                onChange={(e) => setFormData({...formData, service: e.target.value})}
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#B1FF03]"
-              >
-                <option>General Enquiry</option>
-                <option>AI Agentic Chatbots</option>
-                <option>Next.js Website Development</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2 font-mono">Message</label>
-              <textarea 
-                rows={4}
-                value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-                placeholder="Tell us about your project..."
-                className="w-full bg-[#070b19] border border-[#1e293b] rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-[#B1FF03]"
-              ></textarea>
-            </div>
-            <button 
-              type="submit"
-              className="w-full bg-[#B1FF03] hover:bg-[#9de000] text-[#111111] font-extrabold py-4 rounded-xl shadow-lg shadow-[#B1FF03]/20 transition"
-            >
-              Submit & Enquire on WhatsApp ↗
-            </button>
-          </form>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-[#03050c] border-t border-[#1e293b] py-12 text-slate-400 text-sm mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B1FF03] inline-block"></span>
-              <span className="text-lg font-black text-white tracking-wider">NEXUS<span className="text-[#B1FF03]"> / AGENCY</span></span>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-6 text-xs sm:text-sm text-slate-400 font-mono">
-              <a href="/services" className="hover:text-[#B1FF03] transition">Services</a>
-              <a href="/ai-mobile" className="hover:text-[#B1FF03] transition">AI & Mobile</a>
-              <a href="/contact" className="hover:text-[#B1FF03] transition">Contact</a>
-              <a href="https://wa.me/919731720585" target="_blank" rel="noreferrer" className="hover:text-[#B1FF03] transition">WhatsApp (+91 9731720585)</a>
-            </div>
-
-            <div className="text-xs text-slate-500 text-center md:text-right font-mono">
-              © 2026 nexusagency.co.in. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      </div>
     </div>
   );
 }
